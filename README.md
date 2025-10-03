@@ -1,5 +1,20 @@
 # AI Dev Tasks — Quick Guide
 
+## Installation
+
+Clone this repository in the root of your project and run the install script:
+
+```bash
+git clone git@github.com:cloudstudio/ai-dev-tasks.git
+./ai-dev-tasks/install.sh
+```
+
+The script will:
+- Copy all command files to `.claude/commands` and `.cursor/commands`
+- Remove the `ai-dev-tasks` directory automatically
+
+After installation, the commands will be available in both Claude Code and Cursor.
+
 ## Available Rules
 
 - **`create-prd.md`** - Generate Product Requirements Documents for new features
