@@ -10,9 +10,43 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Get the parent directory (project root)
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Define target directories
-CLAUDE_DIR="$PROJECT_ROOT/.claude/commands"
-CURSOR_DIR="$PROJECT_ROOT/.cursor/commands"
+# Function to display menu and get user choice
+show_menu() {
+    echo "🚀 AI Dev Tasks Installer"
+    echo ""
+    echo "Choose installation type:"
+    echo "  1) Local  - Install to current project only (.claude/commands, .cursor/commands)"
+    echo "  2) Global - Install to user home directory (~/.claude/commands, ~/.cursor/commands)"
+    echo "  3) Cancel - Exit without installing"
+    echo ""
+    read -p "Enter your choice (1-3): " choice
+    echo ""
+}
+
+# Show menu and get choice
+show_menu
+
+# Process user choice
+case $choice in
+    1)
+        echo "📍 Installing locally to current project..."
+        CLAUDE_DIR="$PROJECT_ROOT/.claude/commands"
+        CURSOR_DIR="$PROJECT_ROOT/.cursor/commands"
+        ;;
+    2)
+        echo "🌍 Installing globally to user home directory..."
+        CLAUDE_DIR="$HOME/.claude/commands"
+        CURSOR_DIR="$HOME/.cursor/commands"
+        ;;
+    3)
+        echo "❌ Installation cancelled."
+        exit 0
+        ;;
+    *)
+        echo "❌ Invalid choice. Installation cancelled."
+        exit 1
+        ;;
+esac
 
 # Create target directories if they don't exist
 mkdir -p "$CLAUDE_DIR"
